@@ -31,9 +31,18 @@ def scan_ports(host, ports):
     return open_ports
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Advanced Port Scanner")
-    parser.add_argument("host", help="Target host")
-    parser.add_argument("-p", "--ports", help="Port range (e.g., 1-1000)", default="1-1024")
+    parser = argparse.ArgumentParser(
+        description="Advanced Port Scanner",
+        epilog="Example: python scanner.py 192.168.1.1 -p 1-1000"
+    )
+    parser.add_argument("host", help="Target host (IP or domain)")
+    parser.add_argument("-p", "--ports", 
+                        help="Port range to scan (e.g., '1-1000')", 
+                        default="1-1024")
+    parser.add_argument("-t", "--threads", 
+                        help="Number of threads (default: 100)", 
+                        type=int, 
+                        default=100)
     return parser.parse_args()
 
 if __name__ == "__main__":
